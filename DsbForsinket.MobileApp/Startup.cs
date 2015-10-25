@@ -1,19 +1,27 @@
-﻿using System.Web.Http;
+﻿using System;
+using System.Threading.Tasks;
+using System.Web.Http;
 using Microsoft.Azure.Mobile.Server.Config;
+using Microsoft.Owin;
+using Owin;
+
+[assembly: OwinStartup(typeof(DsbForsinket.MobileApp.Startup))]
 
 namespace DsbForsinket.MobileApp
 {
-    public static class WebApiConfig
+    public class Startup
     {
-        public static void Register()
+        public void Configuration(IAppBuilder app)
         {
             HttpConfiguration config = new HttpConfiguration();
+
             new MobileAppConfiguration()
                 .AddPushNotifications()
                 .AddMobileAppHomeController()
                 .MapApiControllers()
                 .ApplyTo(config);
+
+            app.UseWebApi(config);
         }
     }
 }
-

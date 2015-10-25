@@ -7,7 +7,6 @@ namespace DsbForsinket.MobileApp
     {
         protected void Application_Start()
         {
-            WebApiConfig.Register();
         }
     }
 }
