@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DsbForsinket.MobileService"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DsbForsinket.WebJob", "DsbForsinket.WebJob\DsbForsinket.WebJob.csproj", "{6A076698-CEAC-4266-B0F6-7E2051AAEBED}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DsbForsinket.Common", "DsbForsinket.Common\DsbForsinket.Common.csproj", "{916E94CE-0556-496F-AD3C-A7A766A0D2E2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{6A076698-CEAC-4266-B0F6-7E2051AAEBED}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6A076698-CEAC-4266-B0F6-7E2051AAEBED}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6A076698-CEAC-4266-B0F6-7E2051AAEBED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{916E94CE-0556-496F-AD3C-A7A766A0D2E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{916E94CE-0556-496F-AD3C-A7A766A0D2E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{916E94CE-0556-496F-AD3C-A7A766A0D2E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{916E94CE-0556-496F-AD3C-A7A766A0D2E2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

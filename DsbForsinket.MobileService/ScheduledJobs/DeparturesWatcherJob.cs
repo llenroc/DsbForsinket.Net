@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http;
-using DsbForsinket.MobileService.DsbLabs;
+using DsbForsinket.Common.DsbLabs;
 using DsbForsinket.MobileService.Push;
 using Microsoft.WindowsAzure.Mobile.Service;
 

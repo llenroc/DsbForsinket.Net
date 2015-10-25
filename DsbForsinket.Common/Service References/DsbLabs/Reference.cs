@@ -9,8 +9,8 @@
 //------------------------------------------------------------------------------
 
 // Original file name:
-// Generation date: 2015-10-25 00:23:55
-namespace DsbForsinket.MobileService.DsbLabs
+// Generation date: 2015-10-25 13:46:24
+namespace DsbForsinket.Common.DsbLabs
 {
     
     /// <summary>
@@ -38,12 +38,12 @@ namespace DsbForsinket.MobileService.DsbLabs
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
         protected global::System.Type ResolveTypeFromName(string typeName)
         {
-            global::System.Type resolvedType = this.DefaultResolveType(typeName, "ITogLogic.Support", "DsbForsinket.MobileService.DsbLabs.ITogLogic.Support");
+            global::System.Type resolvedType = this.DefaultResolveType(typeName, "ITogLogic.Support", "DsbForsinket.Common.DsbLabs.ITogLogic.Support");
             if ((resolvedType != null))
             {
                 return resolvedType;
             }
-            resolvedType = this.DefaultResolveType(typeName, "ITogLogic.Model", "DsbForsinket.MobileService.DsbLabs");
+            resolvedType = this.DefaultResolveType(typeName, "ITogLogic.Model", "DsbForsinket.Common.DsbLabs");
             if ((resolvedType != null))
             {
                 return resolvedType;
@@ -58,11 +58,11 @@ namespace DsbForsinket.MobileService.DsbLabs
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
         protected string ResolveNameFromType(global::System.Type clientType)
         {
-            if (clientType.Namespace.Equals("DsbForsinket.MobileService.DsbLabs.ITogLogic.Support", global::System.StringComparison.Ordinal))
+            if (clientType.Namespace.Equals("DsbForsinket.Common.DsbLabs.ITogLogic.Support", global::System.StringComparison.Ordinal))
             {
                 return string.Concat("ITogLogic.Support.", clientType.Name);
             }
-            if (clientType.Namespace.Equals("DsbForsinket.MobileService.DsbLabs", global::System.StringComparison.Ordinal))
+            if (clientType.Namespace.Equals("DsbForsinket.Common.DsbLabs", global::System.StringComparison.Ordinal))
             {
                 return string.Concat("ITogLogic.Model.", clientType.Name);
             }
@@ -125,8 +125,9 @@ namespace DsbForsinket.MobileService.DsbLabs
     /// <KeyProperties>
     /// UIC
     /// </KeyProperties>
+    [global::System.Data.Services.Common.EntitySetAttribute("Station")]
     [global::System.Data.Services.Common.DataServiceKeyAttribute("UIC")]
-    public partial class Station
+    public partial class Station : global::System.ComponentModel.INotifyPropertyChanged
     {
         /// <summary>
         /// Create a new Station object.
@@ -154,6 +155,7 @@ namespace DsbForsinket.MobileService.DsbLabs
                 this.OnAbbreviationChanging(value);
                 this._Abbreviation = value;
                 this.OnAbbreviationChanged();
+                this.OnPropertyChanged("Abbreviation");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
@@ -175,6 +177,7 @@ namespace DsbForsinket.MobileService.DsbLabs
                 this.OnNameChanging(value);
                 this._Name = value;
                 this.OnNameChanged();
+                this.OnPropertyChanged("Name");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
@@ -196,6 +199,7 @@ namespace DsbForsinket.MobileService.DsbLabs
                 this.OnUICChanging(value);
                 this._UIC = value;
                 this.OnUICChanged();
+                this.OnPropertyChanged("UIC");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
@@ -217,6 +221,7 @@ namespace DsbForsinket.MobileService.DsbLabs
                 this.OnCountryCodeChanging(value);
                 this._CountryCode = value;
                 this.OnCountryCodeChanged();
+                this.OnPropertyChanged("CountryCode");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
@@ -238,12 +243,23 @@ namespace DsbForsinket.MobileService.DsbLabs
                 this.OnCountryNameChanging(value);
                 this._CountryName = value;
                 this.OnCountryNameChanged();
+                this.OnPropertyChanged("CountryName");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
         private string _CountryName;
         partial void OnCountryNameChanging(string value);
         partial void OnCountryNameChanged();
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
+        public event global::System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
+        protected virtual void OnPropertyChanged(string property)
+        {
+            if ((this.PropertyChanged != null))
+            {
+                this.PropertyChanged(this, new global::System.ComponentModel.PropertyChangedEventArgs(property));
+            }
+        }
     }
     /// <summary>
     /// There are no comments for ITogLogic.Model.Queue in the schema.
@@ -251,8 +267,9 @@ namespace DsbForsinket.MobileService.DsbLabs
     /// <KeyProperties>
     /// ID
     /// </KeyProperties>
+    [global::System.Data.Services.Common.EntitySetAttribute("Queue")]
     [global::System.Data.Services.Common.DataServiceKeyAttribute("ID")]
-    public partial class Queue
+    public partial class Queue : global::System.ComponentModel.INotifyPropertyChanged
     {
         /// <summary>
         /// Create a new Queue object.
@@ -282,6 +299,7 @@ namespace DsbForsinket.MobileService.DsbLabs
                 this.OnIDChanging(value);
                 this._ID = value;
                 this.OnIDChanged();
+                this.OnPropertyChanged("ID");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
@@ -303,6 +321,7 @@ namespace DsbForsinket.MobileService.DsbLabs
                 this.OnStationUicChanging(value);
                 this._StationUic = value;
                 this.OnStationUicChanged();
+                this.OnPropertyChanged("StationUic");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
@@ -324,6 +343,7 @@ namespace DsbForsinket.MobileService.DsbLabs
                 this.OnTrainTypeChanging(value);
                 this._TrainType = value;
                 this.OnTrainTypeChanged();
+                this.OnPropertyChanged("TrainType");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
@@ -345,6 +365,7 @@ namespace DsbForsinket.MobileService.DsbLabs
                 this.OnDestinationNameChanging(value);
                 this._DestinationName = value;
                 this.OnDestinationNameChanged();
+                this.OnPropertyChanged("DestinationName");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
@@ -366,6 +387,7 @@ namespace DsbForsinket.MobileService.DsbLabs
                 this.OnDestinationIDChanging(value);
                 this._DestinationID = value;
                 this.OnDestinationIDChanged();
+                this.OnPropertyChanged("DestinationID");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
@@ -387,6 +409,7 @@ namespace DsbForsinket.MobileService.DsbLabs
                 this.OnTrackChanging(value);
                 this._Track = value;
                 this.OnTrackChanged();
+                this.OnPropertyChanged("Track");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
@@ -408,6 +431,7 @@ namespace DsbForsinket.MobileService.DsbLabs
                 this.OnGeneratedChanging(value);
                 this._Generated = value;
                 this.OnGeneratedChanged();
+                this.OnPropertyChanged("Generated");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
@@ -429,6 +453,7 @@ namespace DsbForsinket.MobileService.DsbLabs
                 this.OnTrainNumberChanging(value);
                 this._TrainNumber = value;
                 this.OnTrainNumberChanged();
+                this.OnPropertyChanged("TrainNumber");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
@@ -450,6 +475,7 @@ namespace DsbForsinket.MobileService.DsbLabs
                 this.OnDestinationCountryCodeChanging(value);
                 this._DestinationCountryCode = value;
                 this.OnDestinationCountryCodeChanged();
+                this.OnPropertyChanged("DestinationCountryCode");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
@@ -471,6 +497,7 @@ namespace DsbForsinket.MobileService.DsbLabs
                 this.OnScheduledArrivalChanging(value);
                 this._ScheduledArrival = value;
                 this.OnScheduledArrivalChanged();
+                this.OnPropertyChanged("ScheduledArrival");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
@@ -492,6 +519,7 @@ namespace DsbForsinket.MobileService.DsbLabs
                 this.OnScheduledDepartureChanging(value);
                 this._ScheduledDeparture = value;
                 this.OnScheduledDepartureChanged();
+                this.OnPropertyChanged("ScheduledDeparture");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
@@ -513,6 +541,7 @@ namespace DsbForsinket.MobileService.DsbLabs
                 this.OnArrivalDelayChanging(value);
                 this._ArrivalDelay = value;
                 this.OnArrivalDelayChanged();
+                this.OnPropertyChanged("ArrivalDelay");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
@@ -534,6 +563,7 @@ namespace DsbForsinket.MobileService.DsbLabs
                 this.OnDepartureDelayChanging(value);
                 this._DepartureDelay = value;
                 this.OnDepartureDelayChanged();
+                this.OnPropertyChanged("DepartureDelay");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
@@ -555,6 +585,7 @@ namespace DsbForsinket.MobileService.DsbLabs
                 this.OnCancelledChanging(value);
                 this._Cancelled = value;
                 this.OnCancelledChanged();
+                this.OnPropertyChanged("Cancelled");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
@@ -576,6 +607,7 @@ namespace DsbForsinket.MobileService.DsbLabs
                 this.OnLineChanging(value);
                 this._Line = value;
                 this.OnLineChanged();
+                this.OnPropertyChanged("Line");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
@@ -597,6 +629,7 @@ namespace DsbForsinket.MobileService.DsbLabs
                 this.OnDirectionChanging(value);
                 this._Direction = value;
                 this.OnDirectionChanged();
+                this.OnPropertyChanged("Direction");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
@@ -618,17 +651,28 @@ namespace DsbForsinket.MobileService.DsbLabs
                 this.OnMinutesToDepartureChanging(value);
                 this._MinutesToDeparture = value;
                 this.OnMinutesToDepartureChanged();
+                this.OnPropertyChanged("MinutesToDeparture");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
         private string _MinutesToDeparture;
         partial void OnMinutesToDepartureChanging(string value);
         partial void OnMinutesToDepartureChanged();
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
+        public event global::System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
+        protected virtual void OnPropertyChanged(string property)
+        {
+            if ((this.PropertyChanged != null))
+            {
+                this.PropertyChanged(this, new global::System.ComponentModel.PropertyChangedEventArgs(property));
+            }
+        }
     }
 }
 // Original file name:
-// Generation date: 2015-10-25 00:23:55
-namespace DsbForsinket.MobileService.DsbLabs.ITogLogic.Support
+// Generation date: 2015-10-25 13:46:24
+namespace DsbForsinket.Common.DsbLabs.ITogLogic.Support
 {
     
     /// <summary>
@@ -638,7 +682,7 @@ namespace DsbForsinket.MobileService.DsbLabs.ITogLogic.Support
     /// ID
     /// </KeyProperties>
     [global::System.Data.Services.Common.DataServiceKeyAttribute("ID")]
-    public partial class QueueTestBuilder : DsbForsinket.MobileService.DsbLabs.Queue
+    public partial class QueueTestBuilder : DsbForsinket.Common.DsbLabs.Queue
     {
         /// <summary>
         /// Create a new QueueTestBuilder object.
