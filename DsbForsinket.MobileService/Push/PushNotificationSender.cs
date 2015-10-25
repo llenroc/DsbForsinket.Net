@@ -15,7 +15,7 @@ namespace DsbForsinket.MobileService.Push
             this.Services = services;
         }
 
-        public async Task SendAsync(string message, TimeSpan timeToLive)
+        public async Task SendAsync(string message)
         {
             try
             {
@@ -24,7 +24,7 @@ namespace DsbForsinket.MobileService.Push
                     ["message"] = message
                 };
 
-                GooglePushMessage pushMessage = new GooglePushMessage(data, timeToLive);
+                GooglePushMessage pushMessage = new GooglePushMessage(data, TimeSpan.Zero);
                 var result = await this.Services.Push.SendAsync(pushMessage);
                 this.Services.Log.Info(result.State.ToString());
             }

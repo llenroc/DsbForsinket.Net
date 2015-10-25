@@ -31,14 +31,14 @@ namespace DsbForsinket.MobileService.ScheduledJobs
                 {
                     string message = $"Delayed trains: {delayedDepartures.Count}";
                     var notificationSender = new PushNotificationSender(this.Services);
-                    await notificationSender.SendAsync(message, TimeSpan.FromMinutes(3));
+                    await notificationSender.SendAsync(message);
                 }
 
-                Services.Log.Info("Completed execution.");
+                this.Services.Log.Info("Completed execution.");
             }
             catch (Exception ex)
             {
-                Services.Log.Error(ex);
+                this.Services.Log.Error(ex);
             }
         }
     }

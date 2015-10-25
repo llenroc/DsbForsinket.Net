@@ -10,7 +10,7 @@ namespace DsbForsinket.MobileService.ScheduledJobs
         public override async Task ExecuteAsync()
         {
             var message = $"TestNotificationJob - {DateTime.UtcNow.ToShortTimeString()}";
-            await new PushNotificationSender(this.Services).SendAsync(message, TimeSpan.FromMinutes(2));
+            await new PushNotificationSender(this.Services).SendAsync(message);
         }
     }
 }
