@@ -5,6 +5,8 @@ VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DsbForsinket.MobileService", "DsbForsinket.MobileService\DsbForsinket.MobileService.csproj", "{D7187C21-707F-44AE-BBFE-F69E095BA2F1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DsbForsinket.WebJob", "DsbForsinket.WebJob\DsbForsinket.WebJob.csproj", "{6A076698-CEAC-4266-B0F6-7E2051AAEBED}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{D7187C21-707F-44AE-BBFE-F69E095BA2F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D7187C21-707F-44AE-BBFE-F69E095BA2F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D7187C21-707F-44AE-BBFE-F69E095BA2F1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6A076698-CEAC-4266-B0F6-7E2051AAEBED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A076698-CEAC-4266-B0F6-7E2051AAEBED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6A076698-CEAC-4266-B0F6-7E2051AAEBED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A076698-CEAC-4266-B0F6-7E2051AAEBED}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
