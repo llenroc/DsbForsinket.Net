@@ -1,17 +1,18 @@
-﻿using Microsoft.Azure.WebJobs;
+﻿using System.Threading.Tasks;
+using DsbForsinket.Common.Jobs;
+using Microsoft.Azure.Mobile.Server;
+using Microsoft.Azure.Mobile.Server.Config;
+using Microsoft.Azure.Mobile.Server.Notifications;
 
 namespace DsbForsinket.WebJob
 {
-    // To learn more about Microsoft Azure WebJobs SDK, please see http://go.microsoft.com/fwlink/?LinkID=320976
-    class Program
+    public class Program
     {
-        // Please set the following connection strings in app.config for this WebJob to run:
-        // AzureWebJobsDashboard and AzureWebJobsStorage
-        static void Main()
+        public static void Main()
         {
-            var host = new JobHost();
-            // The following code ensures that the WebJob will be running continuously
-            host.RunAndBlock();
+            new TestNotificationJob()
+                    .ExecuteAsync()
+                    .Wait();
         }
     }
 }
