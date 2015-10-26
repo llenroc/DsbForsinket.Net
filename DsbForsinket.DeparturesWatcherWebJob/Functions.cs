@@ -4,7 +4,6 @@ using System.IO;
 using System.Threading.Tasks;
 using DsbForsinket.Common;
 using DsbForsinket.Common.DsbLabs;
-using Microsoft.Azure.NotificationHubs;
 using Microsoft.Azure.WebJobs;
 using Microsoft.ServiceBus.Messaging;
 
@@ -35,7 +34,7 @@ namespace DsbForsinket.DeparturesWatcherWebJob
             log.WriteLine("Query executed.");
             log.WriteLine($"Delayed departures {delayedDepartures.Count}.");
 
-            if (delayedDepartures.Any() || true) // TODO: temporary
+            if (delayedDepartures.Any())
             {
                 log.WriteLine($"Sending push message to tag {tag}.");
 
