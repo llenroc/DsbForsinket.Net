@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Threading.Tasks;
 using Microsoft.Azure.Mobile.Server;
-using Microsoft.Azure.Mobile.Server.Config;
 using Microsoft.Azure.NotificationHubs;
 
 namespace DsbForsinket.Common
@@ -13,9 +13,8 @@ namespace DsbForsinket.Common
 
         public PushNotificationSender()
         {
-            var settings = new ServiceSettingsProvider().GetServiceSettings();
-            string notificationHubName = settings.NotificationHubName;
-            string notificationHubConnection = settings.Connections[ServiceSettingsKeys.NotificationHubConnectionString].ConnectionString;
+            string notificationHubName = ConfigurationManager.AppSettings["MS_NotificationHubName"];
+            string notificationHubConnection = ConfigurationManager.ConnectionStrings["MS_NotificationHubConnectionString"].ConnectionString;
 
             this.hubClient = NotificationHubClient.CreateClientFromConnectionString(notificationHubConnection, notificationHubName);
         }

@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.Azure.Mobile.Server.Config;
 using Microsoft.Azure.NotificationHubs;
 using Microsoft.ServiceBus.Messaging;
 
@@ -15,14 +15,13 @@ namespace DsbForsinket.SchedulerWebJob
 
         public static void Main()
         {
-            Temp().Wait();
+            RunAsync().Wait();
         }
 
-        private static async Task Temp()
+        private static async Task RunAsync()
         {
-            var settings = new ServiceSettingsProvider().GetServiceSettings();
-            string notificationHubName = settings.NotificationHubName;
-            string notificationHubConnection = settings.Connections[ServiceSettingsKeys.NotificationHubConnectionString].ConnectionString;
+            string notificationHubName = ConfigurationManager.AppSettings["MS_NotificationHubName"];
+            string notificationHubConnection = ConfigurationManager.ConnectionStrings["MS_NotificationHubConnectionString"].ConnectionString;
 
             var hubClient = NotificationHubClient.CreateClientFromConnectionString(notificationHubConnection, notificationHubName);
 
@@ -50,8 +49,9 @@ namespace DsbForsinket.SchedulerWebJob
                 }
             } while (continuationToken != null);
 
-            var queueConnectionString = settings.Connections["MS_QueueConnectionString"].ConnectionString;
-            var queueName = settings["MS_QueueName"];
+            string queueName = ConfigurationManager.AppSettings["MS_QueueName"];
+            string queueConnectionString = ConfigurationManager.ConnectionStrings["MS_QueueConnectionString"].ConnectionString;
+
             QueueClient queueClient = QueueClient.CreateFromConnectionString(queueConnectionString, queueName);  
 
             var stations = stationsTags.Select(tag => tag.Remove(0, StationTagPrefix.Length));
