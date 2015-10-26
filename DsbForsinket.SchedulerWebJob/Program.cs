@@ -10,6 +10,9 @@ namespace DsbForsinket.SchedulerWebJob
 {
     public class Program
     {
+        private const string StationTagPrefix = "station-";
+        private const string TimeTagPrefix = "time-";
+
         public static void Main()
         {
             Temp().Wait();
@@ -25,11 +28,12 @@ namespace DsbForsinket.SchedulerWebJob
 
             var cphTime = TimeZoneInfo.ConvertTimeBySystemTimeZoneId(DateTime.UtcNow, "Romance Standard Time");
 
+            // TODO: add some randomly distributed suffix to the time tag to allow more than 10k subscribers
             var minutesRounded = (cphTime.Minute / 15) * 15;
-            var timeTag = $"{cphTime.Hour}:{minutesRounded}";
+            var timeTag = $"{TimeTagPrefix}{cphTime.Hour}:{minutesRounded}";
+            var timeTagNoPrefix = $"{cphTime.Hour}:{minutesRounded}";
 
             var stationsTags = new HashSet<string>();
-            var StationTagPrefix = "station:";
 
             string continuationToken = null;
             do
@@ -56,6 +60,8 @@ namespace DsbForsinket.SchedulerWebJob
             {
                 var message = new BrokeredMessage();
                 message.Properties["station"] = station;
+                message.Properties["timetag"] = timeTagNoPrefix;
+                message.Properties["tag"] = $"{station}-{timeTagNoPrefix}";
                 await queueClient.SendAsync(message);
             }
         }
