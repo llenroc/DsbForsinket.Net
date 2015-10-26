@@ -1,22 +1,63 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using Microsoft.Azure.WebJobs;
+using Microsoft.Azure.Mobile.Server.Config;
+using Microsoft.Azure.NotificationHubs;
+using Microsoft.ServiceBus.Messaging;
 
 namespace DsbForsinket.SchedulerWebJob
 {
-    // To learn more about Microsoft Azure WebJobs SDK, please see http://go.microsoft.com/fwlink/?LinkID=320976
-    class Program
+    public class Program
     {
-        // Please set the following connection strings in app.config for this WebJob to run:
-        // AzureWebJobsDashboard and AzureWebJobsStorage
-        static void Main()
+        public static void Main()
         {
-            var host = new JobHost();
-            // The following code ensures that the WebJob will be running continuously
-            host.RunAndBlock();
+            Temp().Wait();
+        }
+
+        private static async Task Temp()
+        {
+            var settings = new ServiceSettingsProvider().GetServiceSettings();
+            string notificationHubName = settings.NotificationHubName;
+            string notificationHubConnection = settings.Connections[ServiceSettingsKeys.NotificationHubConnectionString].ConnectionString;
+
+            var hubClient = NotificationHubClient.CreateClientFromConnectionString(notificationHubConnection, notificationHubName);
+
+            var cphTime = TimeZoneInfo.ConvertTimeBySystemTimeZoneId(DateTime.UtcNow, "Brussels, Copenhagen, Madrid, Paris");
+
+            var minutesRounded = (cphTime.Minute / 15) * 15;
+            var timeTag = $"{cphTime.Hour}:{minutesRounded}";
+
+            var stationsTags = new HashSet<string>();
+            var StationTagPrefix = "station:";
+
+            string continuationToken = null;
+            do
+            {
+                var queryResult = await hubClient.GetRegistrationsByTagAsync(timeTag, continuationToken, Int32.MaxValue);
+                continuationToken = queryResult.ContinuationToken;
+                var registeredTags = queryResult
+                                    .SelectMany(registration => registration.Tags)
+                                    .Where(tag => tag.StartsWith(StationTagPrefix));
+
+                foreach (var tag in registeredTags)
+                {
+                    stationsTags.Add(tag);
+                }
+            } while (continuationToken != null);
+
+            var queueConnectionString = settings.Connections["MS_QueueConnectionString"].ConnectionString;
+            var queueName = settings["MS_QueueName"];
+            QueueClient queueClient = QueueClient.CreateFromConnectionString(queueConnectionString, queueName);  
+
+            var stations = stationsTags.Select(tag => tag.Remove(0, StationTagPrefix.Length));
+
+            foreach (var station in stations)
+            {
+                var message = new BrokeredMessage();
+                message.Properties["station"] = station;
+                await queueClient.SendAsync(message);
+            }
         }
     }
 }
