@@ -23,7 +23,7 @@ namespace DsbForsinket.SchedulerWebJob
 
             var hubClient = NotificationHubClient.CreateClientFromConnectionString(notificationHubConnection, notificationHubName);
 
-            var cphTime = TimeZoneInfo.ConvertTimeBySystemTimeZoneId(DateTime.UtcNow, "Brussels, Copenhagen, Madrid, Paris");
+            var cphTime = TimeZoneInfo.ConvertTimeBySystemTimeZoneId(DateTime.UtcNow, "Romance Standard Time");
 
             var minutesRounded = (cphTime.Minute / 15) * 15;
             var timeTag = $"{cphTime.Hour}:{minutesRounded}";
