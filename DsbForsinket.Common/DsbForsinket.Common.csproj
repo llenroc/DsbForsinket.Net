@@ -127,7 +127,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Jobs\DeparturesWatcherJob.cs" />
-    <Compile Include="Jobs\TestNotificationJob.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PushNotificationSender.cs" />
     <Compile Include="Service References\DsbLabs\Reference.cs">

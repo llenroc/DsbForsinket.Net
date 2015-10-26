@@ -20,6 +20,11 @@ namespace DsbForsinket.Common
             this.hubClient = NotificationHubClient.CreateClientFromConnectionString(notificationHubConnection, notificationHubName);
         }
 
+        public async Task<NotificationOutcome> SendAsync(Dictionary<string, string> data)
+        {
+            return await hubClient.SendGcmNativeNotificationAsync(new GooglePushMessage(data, TimeSpan.Zero).ToString());
+        }
+
         public async Task<NotificationOutcome> SendAsync(string message)
         {
             Dictionary<string, string> data = new Dictionary<string, string>
@@ -27,7 +32,7 @@ namespace DsbForsinket.Common
                 ["message"] = message
             };
 
-            return await hubClient.SendGcmNativeNotificationAsync(new GooglePushMessage(data, TimeSpan.Zero).ToString());
+            return await this.SendAsync(data);
         }
     }
 }

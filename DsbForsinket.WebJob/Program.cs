@@ -1,8 +1,5 @@
-﻿using System.Threading.Tasks;
-using DsbForsinket.Common.Jobs;
-using Microsoft.Azure.Mobile.Server;
-using Microsoft.Azure.Mobile.Server.Config;
-using Microsoft.Azure.Mobile.Server.Notifications;
+﻿using System;
+using DsbForsinket.Common;
 
 namespace DsbForsinket.WebJob
 {
@@ -10,9 +7,13 @@ namespace DsbForsinket.WebJob
     {
         public static void Main()
         {
-            new TestNotificationJob()
-                    .ExecuteAsync()
-                    .Wait();
+            var message = $"TestNotificationJob - {DateTime.UtcNow.ToShortTimeString()}";
+            var notificationOutcome = new PushNotificationSender().SendAsync(message).Result;
+            Console.WriteLine($"State: {notificationOutcome.State}");
+            Console.WriteLine($"Success: {notificationOutcome.Success}");
+            Console.WriteLine($"Failure: {notificationOutcome.Failure}");
+            Console.WriteLine($"NotificationId: {notificationOutcome.NotificationId}");
+            Console.WriteLine($"TrackingId: {notificationOutcome.TrackingId}");
         }
     }
 }
