@@ -62,6 +62,7 @@ namespace DsbForsinket.SchedulerWebJob
                 message.Properties["station"] = station;
                 message.Properties["timetag"] = timeTagNoPrefix;
                 message.Properties["tag"] = $"{station}-{timeTagNoPrefix}";
+                message.Properties["istest"] = false;
                 await queueClient.SendAsync(message);
             }
         }

@@ -19,6 +19,7 @@ namespace DsbForsinket.DeparturesWatcherWebJob
 
             string stationId = (string)message.Properties["station"];
             string tag = (string)message.Properties["tag"];
+            bool isTestSend = (bool) message.Properties["istest"];
             var service = new DSBLabsStationService(new Uri(BaseUrl));
 
             log.WriteLine("Preparing the query.");
@@ -34,7 +35,7 @@ namespace DsbForsinket.DeparturesWatcherWebJob
             log.WriteLine("Query executed.");
             log.WriteLine($"Delayed departures {delayedDepartures.Count}.");
 
-            if (delayedDepartures.Any())
+            if (delayedDepartures.Any() || isTestSend)
             {
                 log.WriteLine($"Sending push message to tag {tag}.");
 
