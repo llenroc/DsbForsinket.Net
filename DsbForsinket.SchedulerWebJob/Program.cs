@@ -29,8 +29,8 @@ namespace DsbForsinket.SchedulerWebJob
             }
 
             var minutesRounded = (cphTime.Minute / 15) * 15;
-            var timeTag = $"{TimeTagPrefix}{cphTime.Hour}:{minutesRounded}";
-            var timeTagNoPrefix = $"{cphTime.Hour}:{minutesRounded}";
+            var timeTag = $"{TimeTagPrefix}{cphTime.Hour}:{minutesRounded:D2}";
+            var timeTagNoPrefix = $"{cphTime.Hour}:{minutesRounded:D2}";
 
             var stationsTags = await GetStationsTagsForTimeTag(timeTag);
 
