@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DsbForsinket.DeparturesWatc
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DsbForsinket.TestConsoleApp", "DsbForsinket.TestConsoleApp\DsbForsinket.TestConsoleApp.csproj", "{906BD501-7623-4337-8631-2BEDA00440A9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DsbForsinket.TestRegistrationsWebJob", "DsbForsinket.TestRegistrationsWebJob\DsbForsinket.TestRegistrationsWebJob.csproj", "{3F626D79-87C9-47B4-807E-E73AD8B20DF4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{906BD501-7623-4337-8631-2BEDA00440A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{906BD501-7623-4337-8631-2BEDA00440A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{906BD501-7623-4337-8631-2BEDA00440A9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3F626D79-87C9-47B4-807E-E73AD8B20DF4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F626D79-87C9-47B4-807E-E73AD8B20DF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F626D79-87C9-47B4-807E-E73AD8B20DF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F626D79-87C9-47B4-807E-E73AD8B20DF4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
