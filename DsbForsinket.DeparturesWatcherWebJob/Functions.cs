@@ -33,7 +33,7 @@ namespace DsbForsinket.DeparturesWatcherWebJob
             var delayedDeparturesQuery =
                 from departure in service.Queue
                 where (departure.StationUic == stationId) &&
-                      (departure.Cancelled == true || departure.DepartureDelay > 0)
+                      (departure.Cancelled == true || departure.DepartureDelay > 0 || isDebugMode)
                 select departure;
 
             log.WriteLine("Executing the query.");
@@ -54,9 +54,11 @@ namespace DsbForsinket.DeparturesWatcherWebJob
 
                 foreach (var departure in delayedDepartures.Take(5).Select((data, index) => new { index, data }))
                 {
-                    var destinationName = departure.data.DestinationName; // TODO: handle s-trains
+                    var destinationName = string.IsNullOrWhiteSpace(departure.data.Line)
+                                                ?  departure.data.DestinationName
+                                                : $"{departure.data.Line} <i>{departure.data.DestinationName}</i>";
                     messageData[$"departureName{departure.index}"] = destinationName;
-                    long? delayInMinutes = departure.data.DepartureDelay / 60;
+                    long delayInMinutes = (departure.data.DepartureDelay / 60) ?? 0;
                     messageData[$"departureDelay{departure.index}"] = Convert.ToString(delayInMinutes);
                 }
 
