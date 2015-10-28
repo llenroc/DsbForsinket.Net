@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Globalization;
 using System.Linq;
 using System.IO;
 using System.Threading.Tasks;
@@ -16,12 +19,15 @@ namespace DsbForsinket.DeparturesWatcherWebJob
         public static async Task ProcessQueueMessage([ServiceBusTrigger("dsbforsinketqueue")] BrokeredMessage message, TextWriter log)
         {
             log.WriteLine($"Got message: {message}");
+            var isDebugMode = Convert.ToBoolean(ConfigurationManager.AppSettings["APP_DEBUG_MODE"]);
+            log.WriteLine($"DEBUG MODE: {isDebugMode}");
 
             string stationId = (string)message.Properties["station"];
             string tag = (string)message.Properties["tag"];
-            bool isTestSend = (bool) message.Properties["istest"];
+            bool isTestSend = (bool)message.Properties["istest"];
             var service = new DSBLabsStationService(new Uri(BaseUrl));
 
+            log.WriteLine($"stationId: {stationId} tag: {tag} isTestSend: {isTestSend}");
             log.WriteLine("Preparing the query.");
 
             var delayedDeparturesQuery =
@@ -33,15 +39,30 @@ namespace DsbForsinket.DeparturesWatcherWebJob
             log.WriteLine("Executing the query.");
             var delayedDepartures = delayedDeparturesQuery.ToList();
             log.WriteLine("Query executed.");
-            log.WriteLine($"Delayed departures {delayedDepartures.Count}.");
+            log.WriteLine($"Delayed departures: {delayedDepartures.Count}.");
 
-            if (delayedDepartures.Any() || isTestSend)
+            if (delayedDepartures.Any() || isTestSend || isDebugMode)
             {
-                log.WriteLine($"Sending push message to tag {tag}.");
+                log.WriteLine($"Sending push message to tag: {tag}.");
 
-                string pushMessage = $"Delayed trains: {delayedDepartures.Count}";
-                var notificationSender = new PushNotificationSender();
-                var notificationOutcome = await notificationSender.SendAsync(pushMessage, tag);
+                delayedDepartures = delayedDepartures.OrderBy(d => d.ScheduledDeparture).ToList();
+
+                Dictionary<string, string> messageData = new Dictionary<string, string>
+                {
+                    ["delayedCount"] = delayedDepartures.Count.ToString(CultureInfo.InvariantCulture)
+                };
+
+                foreach (var departure in delayedDepartures.Take(5).Select((data, index) => new { index, data }))
+                {
+                    var destinationName = departure.data.DestinationName; // TODO: handle s-trains
+                    messageData[$"departureName{departure.index}"] = destinationName;
+                    long? delayInMinutes = departure.data.DepartureDelay / 60;
+                    messageData[$"departureDelay{departure.index}"] = Convert.ToString(delayInMinutes);
+                }
+
+                var notificationSender = new PushNotificationSender(log.WriteLine);
+
+                var notificationOutcome = await notificationSender.SendAsync(messageData, tag);
 
                 log.WriteLine($"State: {notificationOutcome.State}");
                 log.WriteLine($"Success: {notificationOutcome.Success}");

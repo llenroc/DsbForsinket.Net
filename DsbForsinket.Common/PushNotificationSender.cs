@@ -9,10 +9,12 @@ namespace DsbForsinket.Common
 {
     public class PushNotificationSender
     {
+        private readonly Action<string> log;
         private readonly NotificationHubClient hubClient;
 
-        public PushNotificationSender()
+        public PushNotificationSender(Action<string> log)
         {
+            this.log = log;
             string notificationHubName = ConfigurationManager.AppSettings["MS_NotificationHubName"];
             string notificationHubConnection = ConfigurationManager.ConnectionStrings["MS_NotificationHubConnectionString"].ConnectionString;
 
@@ -46,7 +48,9 @@ namespace DsbForsinket.Common
 
         public async Task<NotificationOutcome> SendAsync(Dictionary<string, string> data, string tag)
         {
-            return await hubClient.SendGcmNativeNotificationAsync(new GooglePushMessage(data, TimeSpan.Zero).ToString(), new string[] { tag });
+            var jsonPayload = new GooglePushMessage(data, TimeSpan.Zero).ToString();
+            this.log(jsonPayload);
+            return await hubClient.SendGcmNativeNotificationAsync(jsonPayload, new[] { tag });
         }
     }
 }

@@ -8,7 +8,7 @@ namespace DsbForsinket.WebJob
         public static void Main()
         {
             var message = $"TestNotificationJob - {DateTime.UtcNow.ToShortTimeString()}";
-            var notificationOutcome = new PushNotificationSender().SendAsync(message).Result;
+            var notificationOutcome = new PushNotificationSender(Console.WriteLine).SendAsync(message).Result;
             Console.WriteLine($"State: {notificationOutcome.State}");
             Console.WriteLine($"Success: {notificationOutcome.Success}");
             Console.WriteLine($"Failure: {notificationOutcome.Failure}");

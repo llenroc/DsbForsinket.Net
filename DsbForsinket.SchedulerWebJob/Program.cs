@@ -40,7 +40,7 @@ namespace DsbForsinket.SchedulerWebJob
             QueueClient queueClient = QueueClient.CreateFromConnectionString(queueConnectionString, queueName);
 
             var stations = stationsTags.Select(tag => tag.Remove(0, StationTagPrefix.Length)).ToList();
-            Console.WriteLine($"To schedule :{stations.Count}");
+            Console.WriteLine($"Stations to watch: {stations.Count}");
 
             foreach (var station in stations)
             {
@@ -55,19 +55,18 @@ namespace DsbForsinket.SchedulerWebJob
             }
         }
 
-       
         private static async Task<HashSet<string>> GetStationsTagsForTimeTag(string timeTag)
         {
             var stationsTags = new HashSet<string>();
 
-            // Adding some random suffix to the time tags to workaround the 10k limit per tag
-            foreach (var i in Enumerable.Range(0, 10))
+            foreach (var tagBucket in Tags.BucketsFromTag(timeTag))
             {
                 int count = 0;
                 string continuationToken = null;
+
                 do
                 {
-                    var queryResult = await NotificationHubClients.Default.GetRegistrationsByTagAsync(timeTag + $"-{i}", continuationToken, Int32.MaxValue);
+                    var queryResult = await NotificationHubClients.Default.GetRegistrationsByTagAsync(tagBucket, continuationToken, Int32.MaxValue);
                     continuationToken = queryResult.ContinuationToken;
                     var registeredTags = queryResult
                         .SelectMany(registration => registration.Tags)
@@ -80,7 +79,7 @@ namespace DsbForsinket.SchedulerWebJob
                     }
                 } while (continuationToken != null);
 
-                Console.WriteLine($"Registrations in bucket {i}: {count}");
+                Console.WriteLine($"Registrations in bucket {tagBucket}: {count}");
             }
 
             return stationsTags;
