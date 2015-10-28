@@ -1,8 +1,7 @@
-﻿using Microsoft.Azure.NotificationHubs;
-using System.Configuration;
-using System;
+﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
+using DsbForsinket.Common;
 
 namespace DsbForsinket.TestRegistrationsWebJob
 {
@@ -15,15 +14,10 @@ namespace DsbForsinket.TestRegistrationsWebJob
 
         private static async Task RunAsync()
         {
-            string notificationHubName = ConfigurationManager.AppSettings["MS_NotificationHubName"];
-            string notificationHubConnection = ConfigurationManager.ConnectionStrings["MS_NotificationHubConnectionString"].ConnectionString;
-
-            var hubClient = NotificationHubClient.CreateClientFromConnectionString(notificationHubConnection, notificationHubName);
-
-            var registrations = (await hubClient.GetAllRegistrationsAsync(int.MaxValue)).ToList();
+            var registrations = (await NotificationHubClients.Default.GetAllRegistrationsAsync(int.MaxValue)).ToList();
 
             Console.WriteLine($"Registrations: {registrations.Count}");
-            foreach(var reg in registrations)
+            foreach (var reg in registrations)
             {
                 Console.WriteLine("####################");
                 Console.WriteLine($"Id: {reg.RegistrationId}");
