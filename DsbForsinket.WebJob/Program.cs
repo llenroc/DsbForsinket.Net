@@ -12,14 +12,18 @@ namespace DsbForsinket.WebJob
 
             Dictionary<string, string> messageData = new Dictionary<string, string>
             {
-                ["delayedCount"] = "1234",
-                ["departureName0"] = "Test Train 11:23",
+                ["delayedCount"] = "4",
+                ["departureName0"] = "Test Train",
+                ["departureTime0"] = "11:23",
                 ["departureDelay0"] = "0",
-                ["departureName1"] = "Marcin is testing 11:23",
+                ["departureName1"] = "Marcin is testing",
+                ["departureTime1"] = "00:03",
                 ["departureDelay1"] = "5",
-                ["departureName2"] = "Train 3 11:23",
+                ["departureName2"] = "Train 3",
+                ["departureTime2"] = "",
                 ["departureDelay2"] = "10",
-                ["departureName3"] = "Train 4 11:23",
+                ["departureName3"] = "Train 4",
+                ["departureTime3"] = "11:23",
                 ["departureDelay3"] = "61"
             };
 

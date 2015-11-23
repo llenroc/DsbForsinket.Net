@@ -58,6 +58,9 @@ namespace DsbForsinket.DeparturesWatcherWebJob
                                                 ?  departure.data.DestinationName
                                                 : $"{departure.data.Line} <i>{departure.data.DestinationName}</i>";
                     messageData[$"departureName{departure.index}"] = destinationName;
+                    messageData[$"departureTime{departure.index}"] = departure.data.ScheduledDeparture.HasValue 
+                                                                        ? departure.data.ScheduledDeparture.Value.ToString("HH:mm", CultureInfo.InvariantCulture)
+                                                                        : string.Empty;
                     long delayInMinutes = (departure.data.DepartureDelay / 60) ?? 0;
                     messageData[$"departureDelay{departure.index}"] = Convert.ToString(delayInMinutes);
                 }
