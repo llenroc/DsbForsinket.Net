@@ -1,4 +1,11 @@
-TODO: some description
+Retired project, I moved to a self-hosted service implemented in Akka instead - [dsb-forsinket-akka](https://github.com/omarcin/dsb-forsinket-akka).
+
+Back-end service for the android application which allows the user to subscribe to push notifications about delays in public transportation and quickly check the departures board of selected stations.
+
+The android application is avaliable in my [dsb-forsinket-android](https://github.com/omarcin/dsb-forsinket-android) repository.
+
+The app uses [Rejseplannen's API](http://rejseplannen.dk) to get the information about the departures and delays.
+Azure Notification Hub is used for sending push notifications. Azure Scheduler periodically triggers Web Jobs to check for delays and send out notifications.
 
 The MIT License (MIT)
 
